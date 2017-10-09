@@ -1,0 +1,73 @@
+{extend name="layout/layout" /}
+
+{block name="body"}
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4>{$title?:''} <a href="{:Url('create',['pid' => 0])}" class="btn btn-success pull-right">添加菜单</a></h4>
+		</div>
+
+		<div class="panel-body">
+		</div>
+
+		<table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th class="row-selected">
+                        <input class="checkbox check-all" type="checkbox">
+                    </th>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>上级菜单</th>
+                    <th>分组</th>
+                    <th>URL</th>
+                    <th>排序</th>
+                    <th>隐藏</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+
+            <tbody>
+				{notempty name="list"}
+	                {volist name="list" id="menu"}
+	                    <tr>
+	                        <td><input class="ids row-selected" type="checkbox" name="id[]" value="{$menu.id}"></td>
+	                        <td>{$menu.id}</td>
+	                        <td>
+	                            <a href="{:Url('create',['pid' => $menu['id']]) }">{$menu.title}</a>
+	                        </td>
+	                        <td>{$menu.up_title|default='无'}</td>
+	                        <td>{$menu.group}</td>
+	                        <td>{$menu.url}</td>
+	                        <td>{$menu.sort}</td>
+	                        <td>
+	                            <a href="{:Url('toogleHide',array('id'=>$menu['id'],'value'=>abs($menu['hide']-1)))}" class="ajax-get">
+	                            </a>
+	                        </td>
+	                        <td>
+	    
+	                            <a href="{:Url('edit?id='.$menu['id'])}" class="btn btn-primary btn-sm shiny">
+                                    <i class="fa fa-edit"></i> 编辑
+                                </a>
+                                <a href="#" onClick="warning('确实要删除吗', '{:Url('del?id='.$menu['id'])}')" class="btn btn-danger btn-sm shiny">
+                                    <i class="fa fa-trash-o"></i> 删除
+                                </a>
+	                        </td>
+	                    </tr>
+	                {/volist}
+				{else/}
+					<td colspan="10" class="text-center"> aOh! 暂时还没有内容! </td>
+				{/notempty}
+            </tbody>
+		</table>
+
+		<div class="form-group pull-right">
+			<div class="form-group"></div>
+			{$list->render()}
+			<div class="clearfix"></div>
+		</div>
+
+		<div class="clearfix"></div>
+	</div>
+
+{/block}

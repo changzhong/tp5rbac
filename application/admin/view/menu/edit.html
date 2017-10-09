@@ -1,0 +1,51 @@
+{extend name="layout/layout" /}
+
+{block name="body"}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>{$title}</h4>
+        </div>
+
+        <div class="panel-body">
+            <form action="{:Url()}" method="post" class="">
+                <div class="form-group">
+                    <label class="control-label">标题</label>
+                    <input type="text" class="form-control" name="title" value="{$info.title|default=''}">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">排序</label>
+                    <input type="text" class="form-control" name="sort" value="{$info.sort|default=0}">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">链接</label>
+                    <input type="text" class="form-control" name="url" value="{$info.url|default=''}">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">上级菜单</label>
+                    <select name="pid" class="form-control">
+                        {volist name="menus" id="menu"}
+                            <option value="{$menu.id}" {if condition="input('param.pid') eq $menu['id']"}selected="selected"{/if}>{$menu.title}</option>
+                        {/volist}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">是否隐藏<span class="check-tips"></span></label>
+
+                    <label class="radio-inline"><input type="radio" name="hide" value="1">是</label>
+                    <label class="radio-inline"><input type="radio" name="hide" value="0">否</label>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">说明</label>
+                    <input type="text" class="form-control" name="tip" value="{$info.tip|default=''}">
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="id" value="{$info.id|default=''}">
+                    <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+                    <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{/block}

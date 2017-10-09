@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <!-- 加载head -->
+    {include file="layout/head" /}
+    <!-- /加载head -->
+    <!-- 添加固定的类，得到一个固定的页眉和边栏布局。 -->
+    <!-- 固定布局不兼容边栏迷你。 -->
+    <body class="hold-transition skin-blue fixed sidebar-mini">
+
+        <!-- Site wrapper -->
+        <div class="wrapper">
+            <!-- 加载头部 -->
+            {include file="layout/header"}
+            <!-- /加载头部 -->
+
+            <!-- 加载左侧菜单 -->
+            {include file="layout/left"}
+            <!-- /加载左侧菜单 -->
+
+
+            <!-- 内容区域 -->
+            <div class="content-wrapper">
+                <!-- 导航面包屑 -->
+                <section class="content-header">
+                    <h1>&nbsp;</h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#">Layout</a></li>
+                        <li class="active">Fixed</li>
+                    </ol>
+                </section>
+                <!-- /导航面包屑 -->
+
+                <!-- 内容 -->
+                <section class="content">
+                    {block name="body"}{/block}
+                </section>
+                <!-- /内容 -->
+            </div>
+            <!-- /内容区域  -->
+
+            <!-- 加载右侧设置栏 -->
+            {include file="layout/right"}
+            <!-- /加载右侧设置栏 -->
+
+            <!-- 添加栏的背景。这个div必须放置控制栏后立即 -->
+            <div class="control-sidebar-bg"></div>
+
+        </div>
+        <!-- ./wrapper -->
+
+        <!-- begin js -->
+            <!-- jQuery 2.2.3 -->
+            <script src="__ADMIN_STATIC__/plugins/jQuery/jquery-2.2.3.min.js"></script>
+            <!-- Bootstrap 3.3.6 -->
+            <script src="__ADMIN_STATIC__/bootstrap/js/bootstrap.min.js"></script>
+            <!-- SlimScroll -->
+            <script src="__ADMIN_STATIC__/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+            <!-- FastClick -->
+            <script src="__ADMIN_STATIC__/plugins/fastclick/fastclick.js"></script>
+            <!-- AdminLTE App -->
+            <script src="__ADMIN_STATIC__/dist/js/app.min.js"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="__ADMIN_STATIC__/dist/js/demo.js"></script>
+
+            <!-- 预留js加载 -->
+            {block name="script"}{/block}
+            <!-- /预留js加载 -->
+        <!-- /end js -->
+    </body>
+
+</html>

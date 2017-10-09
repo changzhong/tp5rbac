@@ -1,0 +1,84 @@
+{extend name="layout/layout" /}
+
+{block name="body"}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4>{$title}</h4>
+		</div>
+
+		<div class="panel-body">
+			<div class="col-md-12">
+				<form action="" class="form-inline">
+					<div class="form-group">
+						<label for="username" class="control-label">用户名：</label>
+						<input type="text" class="form-control" id="username" name="username" >
+					</div>
+
+					<div class="form-group">
+						<label for="true_name" class="control-label">真实名称：</label>
+						<input type="text" class="form-control" id="true_name" name="true_name" >
+					</div>
+
+					<div class="form-group">
+						<label for="status" class="control-label">状态：</label>
+						<select name="status" id="status" class="form-control">
+							<option value="">全部</option>
+							{volist name="status" id="st"}
+								<option value="{$key}">{$st}</option>
+							{/volist}
+						</select>
+					</div>
+
+					<div class="form-group">
+						<input type="submit" value="查询" class="btn btn-info">
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+		<table class="table table-hover table-bordered">
+			<tr class="alert-danger">
+				<th>
+					<input type="checkbox" name="" id="" class="all"> ID
+				</th>
+				<th>用户名</th>
+				<th>真实名称</th>
+				<th>添加时间</th>
+				<th>更新时间</th>
+				<th>最后登录时间</th>
+				<th>最后登录IP</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+
+			{empty name="datas"}
+				<tr>
+					<td colspan="9">
+						<h4 class="text-danger text-center">没有相关数据</h4>
+					</td>
+				</tr>
+			{else /}
+				{volist name="datas" id="vo"}
+					<tr>
+						<td>
+							<input type="checkbox" name="ids" id="" value="{$vo.id}"> {$vo.id}
+						</td>
+						<td>{$vo.username}</td>
+						<td>{$vo.true_name}</td>
+						<td>{$vo.create_time}</td>
+						<td>{$vo.update_time}</td>
+						<td>{$vo.last_login_time}</td>
+						<td>{$vo.last_login_ip}</td>
+						<td>{$status[$vo['status']]}</td>
+						<td>
+							<a href="{:url('admin/edit',['id' => $vo['id']])}" class="btn btn-warning btn-xs">编辑</a>
+						</td>
+					</tr>
+				{/volist}
+			{/empty}
+		</table>
+
+		{$datas->render()}
+	</div>
+{/block}
